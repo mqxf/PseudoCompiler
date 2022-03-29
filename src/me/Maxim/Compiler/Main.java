@@ -1,10 +1,12 @@
 package me.Maxim.Compiler;
 
-import java.net.http.HttpResponse;
+import java.util.Scanner;
 
 public class Main {
 
     //Edit this for the pseudocode you want. This code currently shows off all the supported features. Now includes for loop.
+    /*
+    This string used to be what this program compiled, but now look at it as a way to see what this compiler can do.
     static String inCode =
             "BOOLEAN e\n" +
             "BOOLEAN hello\n" +
@@ -50,12 +52,22 @@ public class Main {
             "#ELSE\n" +
             "    OUTPUT \"Hello 3\"\n" +
             "#ENDIF\n";
-
+*/
     public static void main(String[] args) {
-        System.out.println(decompile(inCode));
+        Scanner input = new Scanner(System.in);
+        String userInput = "";
+        String compiled = "";
+        System.out.println("Enter your code below. Indentation does not matter, but do NOT use more than 4 spaces for indentation.");
+        System.out.println("You can use tab if you want indentation. To compile your code write \"--endWriteProcess\" on a new line:");
+        //Worst text editor ever (I'll make a new one soon)
+        while (!userInput.equals("--endWriteProcess")) {
+            userInput = input.nextLine();
+            compiled = compiled + userInput + "\n";
+        }
+        System.out.println(compile(compiled));
     }
 
-    public static String decompile(String code) {
+    public static String compile(String code) {
         code = code.replaceAll("    ", "");
         code = code.replaceAll("   ", "");
         code = code.replaceAll("  ", "");
@@ -92,7 +104,7 @@ public class Main {
         if (code.contains("INPUT")) {
             result = result + "Scanner scanner = new Scanner(System.in);\n\t\t";
         }
-
+        //Good luck looking through this to try and understand it! Sorry for the weird variable names and messy code. I'll improve over time.
         for (int i = 0; i < lines.length; i++) {
             for (int j = 0; j < lines[i].split("@@@").length; j++) {
                 String a = lines[i].split("@@@")[j];
