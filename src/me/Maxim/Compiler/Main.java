@@ -29,6 +29,9 @@ public class Main {
             "    SET i TO i+1\n" +
             "    OUTPUT i + \"\"\n" +
             "#ENDWHILE\n" +
+            "#FOR SET INTEGER j TO 0 COMP j < 10 MODIFY j++ :\n" +
+            "   OUTPUT j + \"\"\n" +
+            "#ENDFOR\n" +
             "#IF value NOT = \"\":\n" +
             "    SET e TO TRUE\n" +
             "#ENDIF\n" +
@@ -66,6 +69,10 @@ public class Main {
         boolean nextBrac = false;
         boolean nextStr = false;
         boolean lastOut = false;
+        boolean nextFor = false;
+        boolean nextSet = false;
+        boolean nextComp = false;
+        boolean nextMod = false;
 
         result = result + "package com.maxim.compiler;\n\n";
 
@@ -86,7 +93,7 @@ public class Main {
         for (int i = 0; i < lines.length; i++) {
             for (int j = 0; j < lines[i].split("@@@").length; j++) {
                 String a = lines[i].split("@@@")[j];
-                if (!nextName && !nextValue) {
+                if (!nextName && !nextValue && !nextFor) {
                     switch (a) {
                         case "BOOLEAN":
                             result = result + "boolean ";
@@ -139,12 +146,19 @@ public class Main {
                             nextCond = true;
                             tabs++;
                             break;
+                        case "#FOR":
+                            result = result + "for (";
+                            nextFor = true;
+                            nextName = false;
+                            tabs++;
+                            break;
                         case "OUTPUT":
                             result = result + "System.out.println(";
                             nextValue = true;
                             nextBrac = true;
                             lastOut = true;
                             break;
+                        case "#ENDFOR":
                         case "#ENDWHILE":
                         case "#ENDIF":
                             tabs--;
@@ -165,6 +179,88 @@ public class Main {
                             }
                         default:
                             break;
+                    }
+                }
+                else if (nextFor) {
+                    if (nextName) {
+                        nextName = false;
+                        result = result + a;
+                    }
+                    else if (nextComp) {
+                        if (a.contains("MODIFY")) {
+                            nextComp = false;
+                            nextMod = true;
+                            result = result + "\b; ";
+                        }
+                        else {
+                            result = result + a + " ";
+                        }
+                    }
+                    else if (nextMod) {
+                        if (a.toCharArray()[a.length() - 1] == ':') {
+                            nextMod = false;
+                            nextFor = false;
+                            result = result + "\b) {\n";
+                            if (tabs > 0) {
+                                for (int h = 0; h < tabs; h++) {
+                                    result = result + "\t";
+                                }
+                            }
+                        }
+                        else {
+                            result = result + a + " ";
+                        }
+                    }
+                    else if (nextSet) {
+                        if (a.contains("INTEGER")) {
+                            result = result + "int ";
+                            nextName = true;
+                        }
+                        else if (a.contains("DOUBLE")) {
+                            result = result + "double ";
+                            nextName = true;
+                        }
+                        else if (a.contains("STRING")) {
+                            result = result + "String ";
+                            nextName = true;
+                        }
+                        else if (a.contains("CHAR")) {
+                            result = result + "char ";
+                            nextName = true;
+                        }
+                        else {
+                            result = result + a;
+                        }
+                        nextSet = false;
+                    }
+                    else {
+                        if (a.contains("SET")) {
+                            nextSet = true;
+                        }
+                        if (a.contains("COMP")) {
+                            result = result + "; ";
+                            nextComp = true;
+                        }
+                        if (a.contains("MODIFY")) {
+                            nextMod = true;
+                        }
+                        if (a.contains("TO")) {
+                            result = result + " = ";
+                            nextName = true;
+                        }
+                        if (a.contains("IN")) {
+                            result = result + " : ";
+                            nextName = true;
+                        }
+                        if (a.toCharArray()[a.length() - 1] == ':') {
+                            nextFor = false;
+                            result = result + ") {\n";
+                            if (tabs > 0) {
+                                for (int h = 0; h < tabs; h++) {
+                                    result = result + "\t";
+                                }
+                            }
+                        }
                     }
                 }
                 else if (nextName) {
