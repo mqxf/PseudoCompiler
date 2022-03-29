@@ -32,6 +32,9 @@ public class Main {
             "#FOR SET INTEGER j TO 0 COMP j < 10 MODIFY j++ :\n" +
             "   OUTPUT j + \"\"\n" +
             "#ENDFOR\n" +
+            "#FOR SET CHAR c IN str :\n" +
+            "   OUTPUT c + \"\"\n" +
+            "#ENDFOR\n" +
             "#IF value NOT = \"\":\n" +
             "    SET e TO TRUE\n" +
             "#ENDIF\n" +
