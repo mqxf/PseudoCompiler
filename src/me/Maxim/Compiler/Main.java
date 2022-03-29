@@ -4,7 +4,7 @@ import java.net.http.HttpResponse;
 
 public class Main {
 
-    //Edit this for the pseudocode you want. This code currently shows off all the supported features
+    //Edit this for the pseudocode you want. This code currently shows off all the supported features. Now includes for loop.
     static String inCode =
             "BOOLEAN e\n" +
             "BOOLEAN hello\n" +
