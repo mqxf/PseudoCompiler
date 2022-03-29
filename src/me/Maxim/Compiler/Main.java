@@ -104,7 +104,7 @@ public class Main {
         if (code.contains("INPUT")) {
             result = result + "Scanner scanner = new Scanner(System.in);\n\t\t";
         }
-        //Good luck looking through this to try and understand it! Sorry for the weird variable names and messy code. I'll improve over time.
+        //Good luck looking through this to try and understand it! Sorry for the weird variable names and messy code. I'll improve over time as I code more.
         for (int i = 0; i < lines.length; i++) {
             for (int j = 0; j < lines[i].split("@@@").length; j++) {
                 String a = lines[i].split("@@@")[j];

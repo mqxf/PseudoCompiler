@@ -1,5 +1,5 @@
 # PseudoCompiler
-This program compiles Pseudocode to Java. It is written in Java and is still lacking features, as I am updating it regularly.  I might add a GUI and other features later.
+This program compiles Pseudocode to Java. It is written in Java and is still lacking features, as I am updating it regularly.  I might add a GUI (or better text editor in console) and other features later.
 
 You can look though the source code or if you want to use it download the out/ folder.
 
