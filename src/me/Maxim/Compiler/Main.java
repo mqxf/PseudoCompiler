@@ -44,7 +44,7 @@ public class Main {
             "    #ENDIF\n" +
             "    OUTPUT \"Hello\"\n" +
             "#ENDIF\n" +
-            "#IF hello:\n" +
+            "#ELIF hello:\n" +
             "    OUTPUT \"Hello 2\"\n" +
             "#ENDIF\n" +
             "#ELSE\n" +
@@ -139,6 +139,13 @@ public class Main {
                             break;
                         case "#IF":
                             result = result + "if (";
+                            nextValue = true;
+                            nextCond = true;
+                            tabs++;
+                            break;
+                        case "#ELIF":
+                        case "#ELSEIF":
+                            result = result + "else if (";
                             nextValue = true;
                             nextCond = true;
                             tabs++;
