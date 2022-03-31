@@ -2,8 +2,6 @@ package me.Maxim.Compiler;
 
 import me.Maxim.Compiler.GUI.Menu;
 
-import java.util.Scanner;
-
 public class Main {
 
     //Edit this for the pseudocode you want. This code currently shows off all the supported features. Now includes for loop.
@@ -58,17 +56,16 @@ public class Main {
     public static void main(String[] args) {
         Menu menu = new Menu();
         menu.setVisible(true);
-        Scanner input = new Scanner(System.in);
-        String userInput = "";
-        String compiled = "";
-        System.out.println("Enter your code below. Indentation does not matter, but do NOT use more than 4 spaces for indentation.");
-        System.out.println("You can use tab if you want indentation. To compile your code write \"--endWriteProcess\" on a new line:");
+        //String userInput = "";
+        //String compiled = "";
+        //System.out.println("Enter your code below. Indentation does not matter, but do NOT use more than 4 spaces for indentation.");
+        //System.out.println("You can use tab if you want indentation. To compile your code write \"--endWriteProcess\" on a new line:");
         //Worst text editor ever (I'll make a new one soon)
-        while (!userInput.equals("--endWriteProcess")) {
-            userInput = input.nextLine();
-            compiled = compiled + userInput + "\n";
-        }
-        System.out.println(compile(compiled));
+        //while (!userInput.equals("--endWriteProcess")) {
+        //    userInput = input.nextLine();
+        //    compiled = compiled + userInput + "\n";
+        //}
+        //System.out.println(compile(compiled));
     }
 
     public static String compile(String code) {
