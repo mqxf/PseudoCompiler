@@ -412,7 +412,7 @@ public class Main {
             }
         }
 
-        result = result + "\b}\n}";
+        result = result + "\b\b}\n}";
         return result;
 
     }
