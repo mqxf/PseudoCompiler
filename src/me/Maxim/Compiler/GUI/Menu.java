@@ -16,6 +16,7 @@ public class Menu extends JFrame {
 	private JLabel instructions;
 	private JPanel topPanel;
 	private JPanel mainPanel;
+	private JPanel totalPanel;
 	private JScrollPane out;
 	private JScrollPane in;
 
@@ -43,15 +44,21 @@ public class Menu extends JFrame {
 		setLocation((d1.width - (getSize()).width) / 2, (d1.height - (getSize()).height) / 2);
 
 		topPanel = new JPanel();
-		topPanel.setMaximumSize(new Dimension(1920, 100));
-		topPanel.setMinimumSize(new Dimension(1280, 100));
-		topPanel.setPreferredSize(new Dimension(1440, 100));
+		topPanel.setMaximumSize(new Dimension(1920, 50));
+		topPanel.setMinimumSize(new Dimension(1280, 50));
+		topPanel.setPreferredSize(new Dimension(1440, 50));
 		topPanel.setOpaque(false);
 
+		totalPanel = new JPanel();
+		totalPanel.setMaximumSize(new Dimension(1920, 1080));
+		totalPanel.setMinimumSize(new Dimension(1280, 1080));
+		totalPanel.setPreferredSize(new Dimension(1440, 1080));
+		totalPanel.setOpaque(false);
+
 		mainPanel = new JPanel();
-		mainPanel.setMaximumSize(new Dimension(1920, 980));
-		mainPanel.setMinimumSize(new Dimension(1280, 620));
-		mainPanel.setPreferredSize(new Dimension(1440, 800));
+		mainPanel.setMaximumSize(new Dimension(1920, 1030));
+		mainPanel.setMinimumSize(new Dimension(1280, 670));
+		mainPanel.setPreferredSize(new Dimension(1440, 850));
 		mainPanel.setOpaque(false);
 
 		instructions = new JLabel();
@@ -98,10 +105,11 @@ public class Menu extends JFrame {
 		out = new JScrollPane(output, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		mainPanel.add(out);
 
-		add(topPanel);
-		topPanel.setBounds(0, 0, 1920, 100);
-		add(mainPanel);
-		mainPanel.setBounds(0, 500, 1920, 980);
+		totalPanel.add(topPanel);
+		topPanel.setBounds(0, 0, 1920, 50);
+		totalPanel.add(mainPanel);
+		mainPanel.setBounds(0, 0, 1920, 1030);
+		add(totalPanel);
 	}
 
 }
