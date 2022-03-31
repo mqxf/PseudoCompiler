@@ -1,5 +1,7 @@
 package me.Maxim.Compiler;
 
+import me.Maxim.Compiler.GUI.Menu;
+
 import java.util.Scanner;
 
 public class Main {
@@ -54,6 +56,8 @@ public class Main {
             "#ENDIF\n";
 */
     public static void main(String[] args) {
+        Menu menu = new Menu();
+        menu.setVisible(true);
         Scanner input = new Scanner(System.in);
         String userInput = "";
         String compiled = "";
